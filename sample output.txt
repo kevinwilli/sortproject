@@ -1,0 +1,18 @@
+How many cars do you want to generate? 5
+Unsorted Cars:
+1996 Toyota F-150, Green, $25308
+2002 Honda E-Class, Gray, $28834
+2007 Audi Jetta, Black, $18492
+2009 Audi Civic, Red, $19895
+2019 Ford E-Class, Yellow, $21793
+
+Selection Sorted Cars:
+2007 Audi Jetta, Black, $18492
+
+2009 Audi Civic, Red, $19895
+
+2019 Ford E-Class, Yellow, $21793
+
+1996 Toyota F-150, Green, $25308
+
+2002 Honda E-Class, Gray, $28834
