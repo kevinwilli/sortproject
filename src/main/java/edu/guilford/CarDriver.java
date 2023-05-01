@@ -46,6 +46,45 @@ public class CarDriver {
         }
         System.out.println("Selection Sort Time: " + selectionSortTime + " nanoseconds");
      
+       //add a static method to sort the car
+        Car[] insertionSortedCars = Arrays.copyOf(cars, numCars);
+        startTime = System.nanoTime();
+        for (int i = 1; i < insertionSortedCars.length; i++) {
+            Car key = insertionSortedCars[i];
+            int j = i - 1;
+            while (j >= 0 && insertionSortedCars[j].getPrice() > key.getPrice()) {
+                insertionSortedCars[j + 1] = insertionSortedCars[j];
+                j = j - 1;
+            }
+            insertionSortedCars[j + 1] = key;
+        }
+        long insertionSortTime = System.nanoTime() - startTime;
+        System.out.println("Insertion Sorted Cars:");
+        for (Car car : insertionSortedCars) {
+            System.out.println(car+"\n");
+        }
+        System.out.println("Insertion Sort Time: " + insertionSortTime + " nanoseconds");
+        
+        //add a static method to sort the car
+        Car[] bubbleSortedCars = Arrays.copyOf(cars, numCars);
+        startTime = System.nanoTime();
+        for (int i = 0; i < bubbleSortedCars.length - 1; i++) {
+            for (int j = 0; j < bubbleSortedCars.length - i - 1; j++) {
+                if (bubbleSortedCars[j].getPrice() > bubbleSortedCars[j + 1].getPrice()) {
+                    // swap temp and arr[i]
+                    Car temp = bubbleSortedCars[j];
+                    bubbleSortedCars[j] = bubbleSortedCars[j + 1];
+                    bubbleSortedCars[j + 1] = temp;
+                }
+            }
+        }
+        long bubbleSortTime = System.nanoTime() - startTime;
+        System.out.println("Bubble Sorted Cars:");
+        for (Car car : bubbleSortedCars) {
+            System.out.println(car+"\n");
+        }
+        System.out.println("Bubble Sort Time: " + bubbleSortTime + " nanoseconds");
+        
        
     }
 
