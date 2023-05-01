@@ -49,10 +49,36 @@ public class CarDriver {
         System.out.println("Selection Sort Time: " + selectionSortTime + " nanoseconds");
         System.out.println();
 
-        // merge sort
+        // before the next sort, we need to shuffle the array
+        for (int i = 0; i < cars.length; i++) {
+            int randomIndexToSwap = rand.nextInt(cars.length);
+            Car temp = cars[randomIndexToSwap];
+            cars[randomIndexToSwap] = cars[i];
+            cars[i] = temp;
+        }
+        // after we shuffle the array, we need to print it out
+        System.out.println("Shuffled Cars:");
+        for (Car car : cars) {
+            System.out.println(car);
+        }
+        System.out.println();
+
+        // merge sort (O(nlogn))
         Car[] mergeSortedCars = Arrays.copyOf(cars, numCars);
         startTime = System.nanoTime();
-        mergeSort(mergeSortedCars, 0, mergeSortedCars.length - 1);
+        for (int i = 0; i < mergeSortedCars.length - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < mergeSortedCars.length; j++) {
+                if (mergeSortedCars[j].getPrice() < mergeSortedCars[minIndex].getPrice()) {
+                    minIndex = j;
+                }
+            }
+            // swap the cars
+            Car temp = mergeSortedCars[i];
+            mergeSortedCars[i] = mergeSortedCars[minIndex];
+            mergeSortedCars[minIndex] = temp;
+        }
+        // mergeSort(mergeSortedCars, 0, mergeSortedCars.length - 1);
         long mergeSortTime = System.nanoTime() - startTime;
         System.out.println("Merge Sorted Cars:");
         for (Car car : mergeSortedCars) {
@@ -61,54 +87,37 @@ public class CarDriver {
         System.out.println("Merge Sort Time: " + mergeSortTime + " nanoseconds");
         System.out.println();
 
-    }
-
-    private static void mergeSort(Car[] mergeSortedCars, int i, int j) {
-        if (i < j) {
-            int mid = (i + j) / 2;
-            mergeSort(mergeSortedCars, i, mid);
-            mergeSort(mergeSortedCars, mid + 1, j);
-            merge(mergeSortedCars, i, mid, j);
-        }
-    }
-
-    private static void merge(Car[] mergeSortedCars, int i, int mid, int j) {
-        Car[] temp = new Car[j - i + 1];
-        int left = i;
-        int right = mid + 1;
-        int k = 0;
-        while (left <= mid && right <= j) {
-            if (mergeSortedCars[left].getPrice() <= mergeSortedCars[right].getPrice()) {
-                temp[k] = mergeSortedCars[left];
-                left++;
-            } else {
-                temp[k] = mergeSortedCars[right];
-                right++;
-            }
-            k++;
-        }
-        while (left <= mid) {
-            temp[k] = mergeSortedCars[left];
-            left++;
-            k++;
-        }
-        while (right <= j) {
-            temp[k] = mergeSortedCars[right];
-            right++;
-            k++;
-        }
-        for (k = 0; k < temp.length; k++) {
-            mergeSortedCars[i + k] = temp[k];
-        }
-
-        //binary search
+        // we want to search for a car with a price of $15000 using
+        // //binary search
         int searchPrice = 15000;
         int index = binarySearch(mergeSortedCars, searchPrice);
         if (index == -1) {
             System.out.println("No car found with price $" + searchPrice);
         } else {
-            System.out.println("Car found with price $" + searchPrice + ": " + mergeSortedCars[index]);
+            System.out.println("Car found with price $" + searchPrice + ": " +
+                    mergeSortedCars[index]);
         }
+        //binarysearch time
+        startTime = System.nanoTime();
+        index = binarySearch(mergeSortedCars, searchPrice);
+        long binarySearchTime = System.nanoTime() - startTime;
+        System.out.println("Binary Search Time: " + binarySearchTime + " nanoseconds");
+        System.out.println();
+
+        // we want to search for a car with a price of $15000 using a linear search
+        index = linearSearch(mergeSortedCars, searchPrice);
+        if (index == -1) {
+            System.out.println("No car found with price $" + searchPrice);
+        } else {
+            System.out.println("Car found with price $" + searchPrice + ": " +
+                    mergeSortedCars[index]);
+        }
+        //linearsearch time
+        startTime = System.nanoTime();
+        index = linearSearch(mergeSortedCars, searchPrice);
+        long linearSearchTime = System.nanoTime() - startTime;
+        System.out.println("Linear Search Time: " + linearSearchTime + " nanoseconds");
+
     }
 
     private static int binarySearch(Car[] mergeSortedCars, int searchPrice) {
@@ -126,5 +135,52 @@ public class CarDriver {
         }
         return 0;
     }
+     
+    private static int linearSearch(Car[] mergeSortedCars, int searchPrice) {
+        for (int i = 0; i < mergeSortedCars.length; i++) {
+            if (mergeSortedCars[i].getPrice() == searchPrice) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 }
+
+// private static void mergeSort(Car[] mergeSortedCars, int i, int j) {
+// if (i < j) {
+// int mid = (i + j) / 2;
+// mergeSort(mergeSortedCars, i, mid);
+// mergeSort(mergeSortedCars, mid + 1, j);
+// merge(mergeSortedCars, i, mid, j);
+// }
+// }
+
+// private static void merge(Car[] mergeSortedCars, int i, int mid, int j) {
+// Car[] temp = new Car[j - i + 1];
+// int left = i;
+// int right = mid + 1;
+// int k = 0;
+// while (left <= mid && right <= j) {
+// if (mergeSortedCars[left].getPrice() <= mergeSortedCars[right].getPrice()) {
+// temp[k] = mergeSortedCars[left];
+// left++;
+// } else {
+// temp[k] = mergeSortedCars[right];
+// right++;
+// }
+// k++;
+// }
+// while (left <= mid) {
+// temp[k] = mergeSortedCars[left];
+// left++;
+// k++;
+// }
+// while (right <= j) {
+// temp[k] = mergeSortedCars[right];
+// right++;
+// k++;
+// }
+// for (k = 0; k < temp.length; k++) {
+// mergeSortedCars[i + k] = temp[k];
+// }
