@@ -1,67 +1,40 @@
-How many cars do you want to generate? 5
+How many cars do you want to generate? 10
 Unsorted Cars:
-2014 Mercedes-Benz Silverado, Yellow, $21447
-2016 Nissan E-Class, Yellow, $20132
 
-Selection Sorted Cars:
-1995 Audi Civic, Green, $12624
+Selection Sort Time: 9700 nanoseconds
+Sorted Cars:
 
-2007 BMW E-Class, Yellow, $16426
+Merge Sort Time: 963300 nanoseconds
+Sorted Cars:
 
-2016 Nissan E-Class, Yellow, $20132
+Counting Sort Time: 724700 nanoseconds
+Sorted Cars:
 
-2014 Mercedes-Benz Silverado, Yellow, $21447
+Insertion Sort Time: 4000 nanoseconds
+Sorted Cars:
 
-1996 Mercedes-Benz Jetta, Green, $26967
-
-Selection Sort Time: 5400 nanoseconds
-
-Shuffled Cars:
-2014 Mercedes-Benz Silverado, Yellow, $21447
-1995 Audi Civic, Green, $12624
-2016 Nissan E-Class, Yellow, $20132
-2007 BMW E-Class, Yellow, $16426
-1996 Mercedes-Benz Jetta, Green, $26967
-
-Merge Sorted Cars:
-1995 Audi Civic, Green, $12624
-
-2007 BMW E-Class, Yellow, $16426
-
-2016 Nissan E-Class, Yellow, $20132
-
-2014 Mercedes-Benz Silverado, Yellow, $21447
-
-1996 Mercedes-Benz Jetta, Green, $26967
-
-Merge Sort Time: 2300 nanoseconds
-
-Car found with price $15000: 1995 Audi Civic, Green, $12624
-Binary Search Time: 1600 nanoseconds
-
-No car found with price $15000
-Linear Search Time: 1400 nanoseconds
 
 
 -------------------------Table----------------------------------
 ----------------------------------------------------------------
 number of cars  |   Sort Time |    | Categories
+----------------------------------------------------------------
+    10          |   9700        |  | (O(^n2))
+    10          |   963300      |  | (O(nlogn))
+----------------------------------------------------------------
+    2500        |   898089800   |  | (O(^n2))
+    2500        |   4451200     |  | (O(nlogn))
+----------------------------------------------------------------
+    250000      |  150141175400 |  | (O(^n2))
+    250000      |    8961600    |  | (O(nlogn))
+----------------------------------------------------------------
+    550000      | 1412487150000 |  | (O(^n2))
+    550000      |   12403200    |  | (O(nlogn))
 ---------------------------------------------------------------
-      5         |    5400       |  | (O(^n2))
-      5         |    2300       |  | (O(nlogn))
-----------------------------------------------------------------
-    10          |    8800       |  | (O(^n2))
-    10          |    1900       |  | (O(nlogn))
-----------------------------------------------------------------
-    20          |   16500       |  | (O(^n2))
-    20          |   15400       |  | (O(nlogn))
-----------------------------------------------------------------
-    50          |   123400      |  | (O(^n2))
-    50          |   94100       |  | (O(nlogn))
-----------------------------------------------------------------
 
 Discussion:
 
 Based on the table above, the merge sort time is less than the
-the selection sort time. Therefore the Merge Sort method is quicker
- and more efficient than Selection sort method.
+the selection sort time when the amount of cars to be sorted is large.
+In other hand, when the amount of cars to be sorted is significantly low,
+the selection sort method is more efficient.

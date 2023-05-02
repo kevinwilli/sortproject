@@ -1,5 +1,6 @@
 package edu.guilford;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Car {
@@ -25,6 +26,7 @@ public class Car {
         this.year = rand.nextInt(25) + 1995;
         this.color = colors[rand.nextInt(colors.length)];
         this.price = rand.nextInt(20000) + 10000;
+
     }
     // getters for the car
     // we don't need setters because we don't want to change the attributes of the
